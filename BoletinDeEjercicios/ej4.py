@@ -5,7 +5,6 @@
 
 
 cad = input("Introduce una cadena de texto: ")
-# Primera letra de cada palabra 
 
 def primera_mayuscula(cad):
     for palabra in cad:
