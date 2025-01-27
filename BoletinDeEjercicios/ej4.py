@@ -4,11 +4,25 @@
 #- No se pueden utilizar operaciones del lenguaje que lo resuelvan directamente.
 
 
-cad = input("Introduce una cadena de texto: ")
-
 def primera_mayuscula(cad):
-    for palabra in cad:
-        print(palabra.capitalize(), end = "")
+    resultado = []  
+    inicio_palabra = True  
 
-primera_mayuscula(cad)
+    for char in cad:
+        if inicio_palabra and char.isalpha():  
+            if 'a' <= char <= 'z':
+                resultado.append(chr(ord(char) - 32))
+            else:
+                resultado.append(char) 
+            inicio_palabra = False 
+        else:
+            if char == ' ': 
+                inicio_palabra = True
+            resultado.append(char) 
 
+    return ''.join(resultado)
+
+
+cad = input("Introduce una cadena de texto: ")
+resultado = primera_mayuscula(cad)
+print(resultado)
