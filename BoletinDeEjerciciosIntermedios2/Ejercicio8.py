@@ -10,4 +10,4 @@ numbers = range(20)
 numeros = ["par" if numero % 2 == 0 else "impar" for numero in numbers]
 
 print(numeros)
-print(range(20))
+ #Teniendo en cuenta que el range(20) genera una lista de números del 0 al 19
