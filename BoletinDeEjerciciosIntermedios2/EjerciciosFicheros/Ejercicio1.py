@@ -71,12 +71,16 @@ while True:
 
     if option == "1":
         listado_alumnos_con_nota_media(alumnos)
+        cargar_datos()
     elif option == "2":
         alumnos_de_curso_con_notas_asignatura(alumnos)
+        cargar_datos()
     elif option == "3":
         porcentaje_aprobados_por_asignatura(alumnos)
+        cargar_datos()
     elif option == "4":
         nombre_curso_fichero_nota_media(alumnos)
+        cargar_datos()
     elif option == "5":
         print("Saliendo del programa...")
         break
