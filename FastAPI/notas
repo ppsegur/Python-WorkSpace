@@ -1,0 +1,20 @@
+// FastApi with Python con Mouredev 
+
+//Curso de 18 lecciones
+//RECURSOS --> repo en github (mouredev.com/Python)
+
+//Que es backend
+// Para realizar el backend necesitaremos django(podemos hacer páginas web y backend )
+//Flash es mucho mas dirigido 
+//En esste curso utilizaremos una nueva tencología llamada FastApi
+//¿Qué es FastApi? --> Es el framework que utiliza algunas empresas
+//como Netflix o Uber.
+// Un framework es un marco de trabajo(Unas herramientas que nnos permite)
+//hacer algo. 
+
+
+//Types hints 
+//FastApi tiene soporte para Docker 
+//Seguramente usaremos un MongoDb para la BDD()
+//El servicor será UNICORN 
+//Instalacion de FAstAPi
