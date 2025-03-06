@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-oauth2 = OAuth2PasswordBearer(tokenUrl="token")
+oauth2 = OAuth2PasswordBearer(tokenUrl="login")
 
 
 class User(BaseModel):
@@ -37,10 +37,15 @@ users_db = {
     },
 }
 
-def search_user(username: str):
+def search_user_db(username: str):
     if username in users_db:
         return UserInDB(**users_db[username])
-    return None
+    
+def search_user(username: str):
+    if username in users_db:
+        return User(**users_db[username])
+    
+    
 
 async def current_user(token: str = Depends(oauth2)):
     user = search_user(token)
