@@ -1,9 +1,9 @@
-from fastapi import FastAPI
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 #from typing import Union
 
 
-app = FastAPI()
+router = APIRouter()
 
 #Inicia el server : uvicorn users:app --reload
 
@@ -21,24 +21,23 @@ users_list = [User(id=1,name="Pepe Segura", email="pepe@example.com", username="
 
 
 
-@app.get("/users")
+@router.get("/users")
 async def usersListJson():
     return users_list 
 #ASI DEVUELVE UN JSON de la lista de usuarios
 
 
-@app.get("/users/{user_id}")
+@router.get("/users/{user_id}")
 async def userfindById(user_id: int):
-    user = filter(lambda user: user.id ==id , users_list)
+    user = filter(lambda user: user.id ==user_id , users_list)
     try:
         return list(user)[0]
     except: 
-        return {"error":"No se ha encontardo usuarios con ese user "}
-
+        raise HTTPException(status_code=404, detail="No existen usuarios con ese nombre") 
 
 #ASI DEVUELVE UN JSON de un usuario en concreto
 
-@app.get("/user/")
+@router.get("/user/")
 async def userfindById(user_id: int, name:str):
     return search_user(user_id, name)
 
@@ -53,16 +52,16 @@ def search_user(id):
 #Para pasar un parametro opcional lo haremos con /{parametro:tipo}
 
 
-@app.post("/user")
+@router.post("/user", status_code=201)
 async def create_user(user: User):
     if type(search_user(user.id)) == User:
-        return {"error":"El usuario ya existe"}
-    
+        raise HTTPException(status_code=204, detail= "El usuario ya existe")
+    #raise se utiliza para lanzar excepciones como si fuera un return 
     users_list.append(user)
     return user
 #ASI DEVUELVE UN JSON de un usuario en concreto creado
 
-@app.put("/user/{user_id}")
+@router.put("/user/{user_id}")
 async def update_user(user: User):
     found = False
 
@@ -71,8 +70,7 @@ async def update_user(user: User):
             users_list[index] = user
             found = True
     if not found:
-        return {"error":"No se ha encontardo usuarios con ese user "}
-   
+        raise HTTPException(status_code=404, detail="No se ha encontrado usuarios con ese user")
     return user
     
         
@@ -80,7 +78,7 @@ async def update_user(user: User):
 
 #ASI DEVUELVE UN JSON de un usuario en concreto actualizado
 
-@app.delete("/user/{user_id}")
+@router.delete("/user/{user_id}")
 async def delete_user(user_id: int):
     found = False
     for index, saved_user in enumerate(users_list):

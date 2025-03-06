@@ -1,9 +1,14 @@
 from fastapi import FastAPI 
-
+from routers import users, peliculas
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
-
+#Routers
+app.include_router(users.router)
+app.include_router(peliculas.router)
+app.mount("/static", StaticFiles(directory="static"), 
+          name="static")
 
 
 
@@ -22,4 +27,6 @@ async def root():
     #en el protocolo HTTP
     #Tienes para documnetacion sin necesidad de hacer nada
     #COn swagger o redoc
-    
+
+    #
+
