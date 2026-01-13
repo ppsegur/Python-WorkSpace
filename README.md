@@ -27,11 +27,36 @@ Ejercicios de nivel intermedio organizados en dos secciones:
 - **`EjercicioListas`**: Ejercicios con listas (`Ejercicio1.py` a `Ejercicio11.py`)
 - **`EjerciciosFicheros`**: Lectura y escritura de ficheros con Python, incluyendo ejemplos con `.csv` y `.txt`
 
+### `flight_api` 🛫
+**API de Búsqueda de Vuelos Baratos** - Nueva aplicación FastAPI para buscar vuelos económicos, con enfoque especial en encontrar las mejores ofertas para el fin de semana.
+
+**Características:**
+- 🔍 Búsqueda de vuelos por origen, destino y fecha
+- 🎯 **Endpoint especializado para vuelos de fin de semana** (más baratos)
+- 💰 Filtrado por precio máximo
+- 📊 Ordenamiento automático por precio
+- 📚 Documentación interactiva (Swagger/ReDoc)
+
+**Archivos destacados:**
+- `main.py`: Aplicación principal FastAPI
+- `routers/flights.py`: Endpoints de búsqueda de vuelos
+- `services/flight_service.py`: Lógica de búsqueda
+- `models/flight.py`: Modelos de datos Pydantic
+- `README.md`: Documentación completa de la API
+
+**Cómo ejecutar:**
+```bash
+cd flight_api
+pip install -r requirements.txt
+uvicorn main:app --reload
+# Visita http://localhost:8000/docs
+```
+
 ### `FastAPI`
 Pruebas y ejemplos sueltos relacionados con FastAPI y anotaciones de tipo en Python (`type_hints.py`).
 
 ### `notas.csv`
-Archivo de ejemplo  utilizado en el de manejo de ficheros.
+Archivo de ejemplo utilizado en el de manejo de ficheros.
 
 ---
 
