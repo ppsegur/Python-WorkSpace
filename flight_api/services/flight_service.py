@@ -18,6 +18,18 @@ class FlightService:
     # Datos de aerolíneas populares en España
     AIRLINES = ["Vueling", "Ryanair", "Iberia", "Air Europa", "EasyJet"]
     
+    # Multiplicadores de precio por aerolínea
+    AIRLINE_PRICE_MULTIPLIERS = {
+        "Ryanair": 0.7,      # Low cost
+        "EasyJet": 0.7,      # Low cost
+        "Iberia": 1.3,       # Premium
+        "Vueling": 1.0,      # Standard
+        "Air Europa": 1.0    # Standard
+    }
+    
+    # Configuración de búsqueda de fin de semana
+    WEEKEND_SEARCH_CUTOFF_HOUR = 12  # Hora del día para considerar el próximo fin de semana
+    
     # Aeropuertos principales en España
     AIRPORTS = {
         "MAD": "Madrid",
@@ -66,10 +78,8 @@ class FlightService:
             airline = random.choice(self.AIRLINES)
             
             # Ajustar precio según aerolínea
-            if airline in ["Ryanair", "EasyJet"]:
-                base_price *= 0.7  # Low cost
-            elif airline == "Iberia":
-                base_price *= 1.3  # Premium
+            multiplier = self.AIRLINE_PRICE_MULTIPLIERS.get(airline, 1.0)
+            base_price *= multiplier
             
             flight = Flight(
                 id=f"{airline[:2].upper()}{random.randint(1000, 9999)}",
@@ -144,7 +154,7 @@ class FlightService:
         # Calcular el próximo fin de semana
         today = datetime.now()
         days_until_friday = (4 - today.weekday()) % 7
-        if days_until_friday == 0 and today.hour >= 12:
+        if days_until_friday == 0 and today.hour >= self.WEEKEND_SEARCH_CUTOFF_HOUR:
             days_until_friday = 7
         
         next_friday = today + timedelta(days=days_until_friday)

@@ -35,7 +35,7 @@ class FlightSearchRequest(BaseModel):
     """Modelo para la solicitud de búsqueda de vuelos"""
     origin: str = Field(..., description="Ciudad/aeropuerto de origen")
     destination: str = Field(..., description="Ciudad/aeropuerto de destino")
-    departure_date: Optional[str] = Field(None, description="Fecha de salida (YYYY-MM-DD)")
+    departure_date: str = Field(..., description="Fecha de salida (YYYY-MM-DD)")
     return_date: Optional[str] = Field(None, description="Fecha de regreso (YYYY-MM-DD)")
     max_price: Optional[float] = Field(None, description="Precio máximo")
     
