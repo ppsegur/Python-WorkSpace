@@ -144,12 +144,12 @@ function WeekendFlights({ airports }) {
         </div>
       )}
 
-      {results && (
+      {results && results.weekend_dates && (
         <div className="weekend-results">
           <div className="weekend-info">
             <h3>📅 Próximo Fin de Semana</h3>
-            <p><strong>Salida:</strong> {formatDate(results.weekend_dates.friday || results.weekend_dates.saturday)}</p>
-            <p><strong>Regreso:</strong> {formatDate(results.weekend_dates.sunday)}</p>
+            <p><strong>Salida:</strong> {formatDate(results.weekend_dates.friday || results.weekend_dates.saturday || results.weekend_dates.departure)}</p>
+            <p><strong>Regreso:</strong> {formatDate(results.weekend_dates.sunday || results.weekend_dates.return)}</p>
           </div>
 
           {results.best_combination && (

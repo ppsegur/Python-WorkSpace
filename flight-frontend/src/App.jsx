@@ -21,14 +21,18 @@ function App() {
       }
       const data = await response.json()
       // Transform the airports object to an array
-      const airportsArray = Object.entries(data.airports || {}).map(([code, name]) => ({
-        code,
-        name
-      }))
-      setAirports(airportsArray)
+      if (data && data.airports && typeof data.airports === 'object') {
+        const airportsArray = Object.entries(data.airports).map(([code, name]) => ({
+          code,
+          name
+        }))
+        setAirports(airportsArray)
+      } else {
+        throw new Error('Formato de datos de aeropuertos inválido')
+      }
       setLoading(false)
     } catch (err) {
-      setError(err.message)
+      setError(err.message || 'Error al cargar aeropuertos')
       setLoading(false)
     }
   }
