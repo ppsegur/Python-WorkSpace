@@ -18,7 +18,7 @@
   background-color: var(--card-background);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-strong);
 }
 
 .weekend-info h3 {
@@ -37,7 +37,7 @@
   background: linear-gradient(135deg, #f8f9fa, #ffffff);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 8px 20px rgba(39, 174, 96, 0.2), 0 4px 10px rgba(39, 174, 96, 0.1);
   border: 2px solid var(--success-color);
 }
 
@@ -54,7 +54,7 @@
   border-radius: 12px;
   text-align: center;
   margin-bottom: 1.5rem;
-  box-shadow: var(--shadow);
+  box-shadow: 0 6px 16px rgba(39, 174, 96, 0.3);
 }
 
 .price-highlight .price {
@@ -78,6 +78,7 @@
 .flight-card.best {
   border: 2px solid var(--success-color);
   background: linear-gradient(135deg, #ffffff, #f0fff4);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.15);
 }
 
 .flight-lists {
@@ -90,7 +91,7 @@
   background-color: var(--card-background);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-strong);
 }
 
 .flight-list h3 {
@@ -106,14 +107,14 @@
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   border: 1px solid var(--border-color);
 }
 
 .flight-card:hover {
-  box-shadow: var(--shadow);
-  transform: translateX(4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
+  transform: translateX(6px);
 }
 
 .flight-header {
@@ -130,6 +131,7 @@
   border-radius: 20px;
   font-weight: bold;
   font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(74, 144, 226, 0.3);
 }
 
 .airline {
@@ -183,6 +185,20 @@
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--success-color);
+}
+
+/* Form validation styles */
+.weekend-flights .form-group input.invalid,
+.weekend-flights .form-group select.invalid {
+  border-color: var(--error-color);
+  background-color: #fff5f5;
+}
+
+.weekend-flights .form-group .error-text {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: block;
 }
 
 @media (max-width: 768px) {

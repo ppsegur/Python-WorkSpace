@@ -13,6 +13,43 @@ function FlightSearch({ airports }) {
   const [results, setResults] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [validationErrors, setValidationErrors] = useState({})
+
+  const validateForm = () => {
+    const errors = {}
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    // Validate origin and destination
+    if (searchParams.origin && searchParams.destination && searchParams.origin === searchParams.destination) {
+      errors.destination = 'El destino debe ser diferente al origen'
+    }
+
+    // Validate departure date
+    if (searchParams.departureDate) {
+      const departureDate = new Date(searchParams.departureDate)
+      if (departureDate < today) {
+        errors.departureDate = 'La fecha de salida debe ser hoy o posterior'
+      }
+    }
+
+    // Validate return date
+    if (searchParams.returnDate && searchParams.departureDate) {
+      const departureDate = new Date(searchParams.departureDate)
+      const returnDate = new Date(searchParams.returnDate)
+      if (returnDate <= departureDate) {
+        errors.returnDate = 'La fecha de regreso debe ser posterior a la de salida'
+      }
+    }
+
+    // Validate price
+    if (searchParams.maxPrice && parseFloat(searchParams.maxPrice) <= 0) {
+      errors.maxPrice = 'El precio debe ser mayor a 0'
+    }
+
+    setValidationErrors(errors)
+    return Object.keys(errors).length === 0
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -20,10 +57,23 @@ function FlightSearch({ airports }) {
       ...prev,
       [name]: value
     }))
+    // Clear validation error for this field
+    if (validationErrors[name]) {
+      setValidationErrors(prev => {
+        const newErrors = { ...prev }
+        delete newErrors[name]
+        return newErrors
+      })
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    if (!validateForm()) {
+      return
+    }
+
     setLoading(true)
     setError(null)
     setResults(null)
@@ -69,6 +119,7 @@ function FlightSearch({ airports }) {
                 name="origin"
                 value={searchParams.origin}
                 onChange={handleInputChange}
+                className={validationErrors.origin ? 'invalid' : ''}
                 required
               >
                 <option value="">Selecciona aeropuerto</option>
@@ -78,6 +129,9 @@ function FlightSearch({ airports }) {
                   </option>
                 ))}
               </select>
+              {validationErrors.origin && (
+                <span className="error-text">{validationErrors.origin}</span>
+              )}
             </div>
 
             <div className="form-group">
@@ -87,6 +141,7 @@ function FlightSearch({ airports }) {
                 name="destination"
                 value={searchParams.destination}
                 onChange={handleInputChange}
+                className={validationErrors.destination ? 'invalid' : ''}
                 required
               >
                 <option value="">Selecciona aeropuerto</option>
@@ -96,6 +151,9 @@ function FlightSearch({ airports }) {
                   </option>
                 ))}
               </select>
+              {validationErrors.destination && (
+                <span className="error-text">{validationErrors.destination}</span>
+              )}
             </div>
           </div>
 
@@ -108,8 +166,12 @@ function FlightSearch({ airports }) {
                 name="departureDate"
                 value={searchParams.departureDate}
                 onChange={handleInputChange}
+                className={validationErrors.departureDate ? 'invalid' : ''}
                 required
               />
+              {validationErrors.departureDate && (
+                <span className="error-text">{validationErrors.departureDate}</span>
+              )}
             </div>
 
             <div className="form-group">
@@ -120,7 +182,11 @@ function FlightSearch({ airports }) {
                 name="returnDate"
                 value={searchParams.returnDate}
                 onChange={handleInputChange}
+                className={validationErrors.returnDate ? 'invalid' : ''}
               />
+              {validationErrors.returnDate && (
+                <span className="error-text">{validationErrors.returnDate}</span>
+              )}
             </div>
           </div>
 
@@ -133,10 +199,14 @@ function FlightSearch({ airports }) {
                 name="maxPrice"
                 value={searchParams.maxPrice}
                 onChange={handleInputChange}
+                className={validationErrors.maxPrice ? 'invalid' : ''}
                 min="0"
                 step="0.01"
                 placeholder="Ej: 100.00"
               />
+              {validationErrors.maxPrice && (
+                <span className="error-text">{validationErrors.maxPrice}</span>
+              )}
             </div>
           </div>
 
