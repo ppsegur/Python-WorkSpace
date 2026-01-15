@@ -20,7 +20,12 @@ function App() {
         throw new Error('Error al cargar aeropuertos')
       }
       const data = await response.json()
-      setAirports(data.airports || [])
+      // Transform the airports object to an array
+      const airportsArray = Object.entries(data.airports || {}).map(([code, name]) => ({
+        code,
+        name
+      }))
+      setAirports(airportsArray)
       setLoading(false)
     } catch (err) {
       setError(err.message)
