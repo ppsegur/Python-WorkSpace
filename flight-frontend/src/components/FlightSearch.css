@@ -6,8 +6,9 @@
   background-color: var(--card-background);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-strong);
   margin-bottom: 2rem;
+  transition: box-shadow 0.3s ease;
 }
 
 .search-form-container h2 {
@@ -48,6 +49,25 @@
   font-size: 1rem;
   transition: all 0.3s ease;
   background-color: white;
+  box-shadow: var(--shadow-soft);
+}
+
+.form-group input:hover,
+.form-group select:hover {
+  border-color: #bdc3c7;
+}
+
+.form-group input.invalid,
+.form-group select.invalid {
+  border-color: var(--error-color);
+  background-color: #fff5f5;
+}
+
+.form-group .error-text {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: block;
 }
 
 .form-group input:focus,
@@ -67,12 +87,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
 }
 
 .search-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
 }
 
 .search-button:disabled {
