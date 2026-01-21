@@ -17,13 +17,13 @@ class Film(BaseModel):
 peliculas_list = [Film(id=1, nombre="El Padrino", director="Francis Ford Coppola", genero="Drama", duracion=175, anio=1972, portada="static/El_Padrino.jpg"),
                 Film(id=2, nombre="El Padrino II", director="Francis Ford Coppola", genero="Drama", duracion=202, anio=1974, portada="static/El_Padrino_II.jpg"),
                 Film(id=3, nombre="El Padrino III", director="Francis Ford Coppola", genero="Drama", duracion=162, anio=1990 , portada="static/El_Padrino_III.jpg"),
-                Film(id=4, nombre="Pulp Fiction", director="Quentin Tarantino", genero="Crime", duracion=154, anio=1994),
-                Film(id=5, nombre="Inception", director="Christopher Nolan", genero="Sci-Fi", duracion=148, anio=2010),
-                Film(id=6, nombre="The Dark Knight", director="Christopher Nolan", genero="Action", duracion=152, anio=2008),
-                Film(id=7, nombre="Fight Club", director="David Fincher", genero="Drama", duracion=139, anio=1999),
-                Film(id=8, nombre="Forrest Gump", director="Robert Zemeckis", genero="Drama", duracion=142, anio=1994),
-                Film(id=9, nombre="The Matrix", director="Lana Wachowski, Lilly Wachowski", genero="Sci-Fi", duracion=136, anio=1999),
-                Film(id=10, nombre="The Shawshank Redemption", director="Frank Darabont", genero="Drama", duracion=142, anio=1994)]
+                Film(id=4, nombre="Pulp Fiction", director="Quentin Tarantino", genero="Crime", duracion=154, anio=1994, portada="static/pulp_fiction.jpg"),
+                Film(id=5, nombre="Inception", director="Christopher Nolan", genero="Sci-Fi", duracion=148, anio=2010, portada="static/inception.jpg"),
+                Film(id=6, nombre="The Dark Knight", director="Christopher Nolan", genero="Action", duracion=152, anio=2008, portada="static/dark_knight.jpg"),
+                Film(id=7, nombre="Fight Club", director="David Fincher", genero="Drama", duracion=139, anio=1999, portada="static/fight_club.jpg"),
+                Film(id=8, nombre="Forrest Gump", director="Robert Zemeckis", genero="Drama", duracion=142, anio=1994, portada="static/forrest_gump.jpg"),
+                Film(id=9, nombre="The Matrix", director="Lana Wachowski, Lilly Wachowski", genero="Sci-Fi", duracion=136, anio=1999, portada="static/matrix.jpg"),
+                Film(id=10, nombre="The Shawshank Redemption", director="Frank Darabont", genero="Drama", duracion=142, anio=1994, portada="static/shawshank.jpg")]
              
 
 
