@@ -83,7 +83,7 @@ async def delete_user(user_id: int):
     found = False
     for index, saved_user in enumerate(users_list):
         if saved_user.id == user_id:
-            del users_list(index)
+            del users_list[index]
             found = True
             
     if not found:
