@@ -9,6 +9,7 @@ router = APIRouter()
 
 #Entidad User
 class User(BaseModel):
+    id: int
     name: str
     email: str
     username: str

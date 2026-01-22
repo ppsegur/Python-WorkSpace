@@ -1,0 +1,28 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  background: #f5f5f5;
+}
+
+.footer {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  margin-top: auto;
+}
+
+.footer p {
+  margin: 0.25rem 0;
+  opacity: 0.9;
+}
+
+.footer p:first-child {
+  font-weight: 600;
+  font-size: 1.1rem;
+}

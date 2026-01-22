@@ -1,0 +1,135 @@
+.watchlists-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.watchlists-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.watchlists-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.watchlists-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.watchlists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.watchlist-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.watchlist-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.watchlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #667eea;
+}
+
+.watchlist-header h3 {
+  color: #333;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.watchlist-count {
+  background: #667eea;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.watchlist-description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.watchlist-films h4 {
+  color: #667eea;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.watchlist-films ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.watchlist-films li {
+  color: #555;
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.watchlist-films li:before {
+  content: "🎬";
+  position: absolute;
+  left: 0;
+}
+
+.watchlist-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.watchlist-user {
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.watchlist-date {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.no-watchlists {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+  background: white;
+  border-radius: 0.5rem;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.error {
+  color: #dc2626;
+}

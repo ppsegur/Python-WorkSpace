@@ -1,0 +1,152 @@
+.movies-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.movies-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.movies-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.movies-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filters label {
+  font-weight: 600;
+  color: #333;
+}
+
+.genre-select {
+  padding: 0.5rem 1rem;
+  border: 2px solid #667eea;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background: white;
+  color: #333;
+  min-width: 200px;
+}
+
+.genre-select:focus {
+  outline: none;
+  border-color: #764ba2;
+}
+
+.movie-count {
+  margin-left: auto;
+  color: #666;
+  font-weight: 600;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.movie-card {
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.movie-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 1.5rem;
+}
+
+.movie-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.movie-year {
+  font-size: 1.1rem;
+  color: #667eea;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.movie-genre {
+  display: inline-block;
+  background: #667eea;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.movie-director {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.movie-duration {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.loading,
+.error,
+.no-movies {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.error {
+  color: #dc2626;
+  background: #fee;
+  border-radius: 0.5rem;
+  padding: 2rem;
+}
+
+.no-movies p {
+  color: #666;
+}

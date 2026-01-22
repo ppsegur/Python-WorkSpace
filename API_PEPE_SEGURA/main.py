@@ -1,4 +1,5 @@
 from fastapi import FastAPI 
+from fastapi.middleware.cors import CORSMiddleware
 from routers import users, peliculas, actors, directors, reviews, genres, watchlists, ratings
 from fastapi.staticfiles import StaticFiles
 
@@ -33,6 +34,15 @@ app = FastAPI(
     license_info={
         "name": "MIT",
     },
+)
+
+# Configure CORS for frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:3000"],  # Frontend dev servers
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 #Routers - Now with 8 complete entities!
