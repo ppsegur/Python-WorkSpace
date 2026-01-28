@@ -211,7 +211,14 @@ function FlightSearch({ airports }) {
           </div>
 
           <button type="submit" className="search-button" disabled={loading}>
-            {loading ? '🔍 Buscando...' : '🔍 Buscar Vuelos'}
+            {loading ? (
+              <>
+                <span className="button-spinner"></span>
+                Buscando...
+              </>
+            ) : (
+              '🔍 Buscar Vuelos'
+            )}
           </button>
         </form>
       </div>

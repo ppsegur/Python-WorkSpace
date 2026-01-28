@@ -1,13 +1,26 @@
 .flight-results {
   width: 100%;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .results-header {
-  background-color: var(--card-background);
-  padding: 1.5rem;
-  border-radius: 12px;
+  background: linear-gradient(135deg, var(--card-background), #f8f9fa);
+  padding: 2rem;
+  border-radius: 16px;
   box-shadow: var(--shadow-strong);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--primary-color);
 }
 
 .results-header h2 {
@@ -42,18 +55,37 @@
 
 .flight-card {
   background-color: var(--card-background);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   gap: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.flight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.flight-card:hover::before {
+  opacity: 1;
 }
 
 .flight-card:hover {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12), 0 6px 12px rgba(0, 0, 0, 0.08);
-  transform: translateY(-4px);
+  transform: translateY(-6px) scale(1.01);
+  border-color: var(--primary-color);
 }
 
 .flight-rank {

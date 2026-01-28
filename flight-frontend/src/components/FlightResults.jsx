@@ -36,21 +36,21 @@ function FlightResults({ results }) {
   return (
     <div className="flight-results">
       <div className="results-header">
-        <h2>Resultados de Búsqueda</h2>
+        <h2>✨ Resultados de Búsqueda</h2>
         <div className="search-info">
           <p>
-            <strong>{results.search_criteria.origin}</strong> → <strong>{results.search_criteria.destination}</strong>
+            <strong>Ruta:</strong> {results.search_criteria.origin} → {results.search_criteria.destination}
           </p>
-          <p>Salida: {results.search_criteria.departure_date}</p>
+          <p><strong>Salida:</strong> {results.search_criteria.departure_date}</p>
           {results.search_criteria.return_date && (
-            <p>Regreso: {results.search_criteria.return_date}</p>
+            <p><strong>Regreso:</strong> {results.search_criteria.return_date}</p>
           )}
           {results.search_criteria.max_price && (
-            <p>Precio máximo: €{results.search_criteria.max_price}</p>
+            <p><strong>Precio máximo:</strong> €{results.search_criteria.max_price}</p>
           )}
         </div>
         <p className="results-count">
-          {results.results_count} vuelo{results.results_count !== 1 ? 's' : ''} encontrado{results.results_count !== 1 ? 's' : ''}
+          🎯 {results.results_count} vuelo{results.results_count !== 1 ? 's' : ''} encontrado{results.results_count !== 1 ? 's' : ''}
         </p>
       </div>
 
