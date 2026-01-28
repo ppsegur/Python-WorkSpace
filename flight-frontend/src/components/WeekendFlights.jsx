@@ -176,7 +176,14 @@ function WeekendFlights({ airports }) {
           </div>
 
           <button type="submit" className="search-button" disabled={loading}>
-            {loading ? '🔍 Buscando...' : '🎉 Buscar Vuelos de Fin de Semana'}
+            {loading ? (
+              <>
+                <span className="button-spinner"></span>
+                Buscando...
+              </>
+            ) : (
+              '🎉 Buscar Vuelos de Fin de Semana'
+            )}
           </button>
         </form>
       </div>

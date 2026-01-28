@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Query
-from typing import Optional
+from typing import Optional, Literal
 from ..models.flight import Flight, FlightSearchRequest, WeekendFlightRequest
 from ..services.flight_service import FlightService
 
@@ -128,7 +128,7 @@ async def post_cheapest_weekend_flights(request: WeekendFlightRequest):
             max_price=request.max_price
         )
         
-        return {
+         return {
             "search_criteria": {
                 "origin": request.origin.upper(),
                 "destination": request.destination.upper(),
@@ -138,3 +138,97 @@ async def post_cheapest_weekend_flights(request: WeekendFlightRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al buscar vuelos de fin de semana: {str(e)}")
+
+
+@router.get("/search/advanced", summary="Búsqueda avanzada con filtros y ordenación")
+async def advanced_search_flights(
+    origin: str = Query(..., description="Código del aeropuerto de origen (ej: MAD)"),
+    destination: str = Query(..., description="Código del aeropuerto de destino (ej: BCN)"),
+    departure_date: str = Query(..., description="Fecha de salida (formato: YYYY-MM-DD)"),
+    return_date: Optional[str] = Query(None, description="Fecha de regreso (formato: YYYY-MM-DD)"),
+    max_price: Optional[float] = Query(None, description="Precio máximo del vuelo"),
+    min_price: Optional[float] = Query(None, description="Precio mínimo del vuelo"),
+    airline: Optional[str] = Query(None, description="Filtrar por aerolínea específica"),
+    sort_by: Literal["price", "duration", "departure"] = Query("price", description="Ordenar por: price, duration, departure"),
+    order: Literal["asc", "desc"] = Query("asc", description="Orden: asc (ascendente), desc (descendente)"),
+    limit: Optional[int] = Query(None, description="Limitar número de resultados", ge=1, le=100)
+):
+    """
+    Búsqueda avanzada de vuelos con múltiples filtros y opciones de ordenación.
+    
+    **Filtros disponibles:**
+    - **max_price**: Precio máximo
+    - **min_price**: Precio mínimo
+    - **airline**: Filtrar por aerolínea específica
+    
+    **Opciones de ordenación:**
+    - **sort_by**: Campo por el que ordenar (price, duration, departure)
+    - **order**: Orden ascendente (asc) o descendente (desc)
+    - **limit**: Limitar número de resultados
+    
+    Esta funcionalidad mejora la API de vuelos permitiendo búsquedas más específicas.
+    """
+    try:
+        flights = flight_service.search_flights(
+            origin=origin.upper(),
+            destination=destination.upper(),
+            departure_date=departure_date,
+            return_date=return_date,
+            max_price=max_price
+        )
+        
+        # Aplicar filtro de precio mínimo
+        if min_price:
+            flights = [f for f in flights if f.price >= min_price]
+        
+        # Filtrar por aerolínea
+        if airline:
+            flights = [f for f in flights if f.airline.lower() == airline.lower()]
+        
+        # Ordenar según criterio
+        if sort_by == "price":
+            flights.sort(key=lambda x: x.price, reverse=(order == "desc"))
+        elif sort_by == "duration":
+            flights.sort(key=lambda x: x.duration_minutes, reverse=(order == "desc"))
+        elif sort_by == "departure":
+            flights.sort(key=lambda x: x.departure_date, reverse=(order == "desc"))
+        
+        # Limitar resultados
+        if limit:
+            flights = flights[:limit]
+        
+        return {
+            "search_criteria": {
+                "origin": origin.upper(),
+                "destination": destination.upper(),
+                "departure_date": departure_date,
+                "return_date": return_date,
+                "filters": {
+                    "max_price": max_price,
+                    "min_price": min_price,
+                    "airline": airline,
+                    "sort_by": sort_by,
+                    "order": order,
+                    "limit": limit
+                }
+            },
+            "results_count": len(flights),
+            "flights": flights
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=f"Parámetro inválido: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al buscar vuelos: {str(e)}")
+
+
+@router.get("/airlines", summary="Obtener lista de aerolíneas disponibles")
+async def get_airlines():
+    """
+    Obtiene la lista de aerolíneas disponibles en el sistema.
+    Útil para filtrar búsquedas por aerolínea específica.
+    """
+    return {
+        "airlines": flight_service.AIRLINES,
+        "message": "Aerolíneas disponibles en el sistema"
+    }
+

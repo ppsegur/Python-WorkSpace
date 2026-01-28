@@ -2,17 +2,21 @@ from typing import List
 from datetime import datetime, timedelta
 from ..models.flight import Flight
 import random
+import os
 
 
 class FlightService:
     """
     Servicio para buscar vuelos.
     
-    Nota: Esta es una implementación de demostración con datos simulados.
-    Para conectar con APIs reales como Skyscanner, se necesitaría:
-    - API Key de Skyscanner (https://developers.skyscanner.net/)
-    - Librería como 'skyscanner-python' o requests para llamadas HTTP
-    - Manejo de autenticación y rate limiting
+    Este servicio puede usar datos simulados o integrarse con la API de Skyscanner.
+    
+    Para usar la API de Skyscanner:
+    1. Obtener API Key en: https://developers.skyscanner.net/
+    2. Configurar variable de entorno: SKYSCANNER_API_KEY=tu_api_key
+    3. El servicio automáticamente usará la API real cuando esté configurada
+    
+    Si no hay API key configurada, usa datos simulados (modo demostración).
     """
     
     # Datos de aerolíneas populares en España
@@ -43,8 +47,24 @@ class FlightService:
     }
     
     def __init__(self):
-        """Inicializa el servicio de vuelos"""
-        pass
+        """Inicializa el servicio de vuelos y verifica configuración de Skyscanner"""
+        self.use_skyscanner = False
+        self.skyscanner_service = None
+        
+        # Intentar inicializar el servicio de Skyscanner si está configurado
+        try:
+            from .skyscanner_service import get_skyscanner_service
+            service = get_skyscanner_service()
+            if service.is_configured():
+                self.skyscanner_service = service
+                self.use_skyscanner = True
+                print("✅ Skyscanner API configurada - usando datos reales")
+            else:
+                print("⚠️  Skyscanner API no configurada - usando datos simulados")
+                print("   Para usar datos reales, configura SKYSCANNER_API_KEY")
+        except ImportError:
+            print("⚠️  Módulo Skyscanner no disponible - usando datos simulados")
+    
     
     def _generate_mock_flights(
         self, 
@@ -107,6 +127,9 @@ class FlightService:
         """
         Busca vuelos según los criterios especificados.
         
+        Si la API de Skyscanner está configurada, usa datos reales.
+        De lo contrario, usa datos simulados.
+        
         Args:
             origin: Código del aeropuerto de origen (ej: "MAD")
             destination: Código del aeropuerto de destino (ej: "BCN")
@@ -117,10 +140,23 @@ class FlightService:
         Returns:
             Lista de vuelos encontrados
         """
-        # Convertir fecha de string a datetime
-        dep_date = datetime.strptime(departure_date, "%Y-%m-%d")
+        # Intentar usar Skyscanner API si está configurada
+        if self.use_skyscanner and self.skyscanner_service:
+            try:
+                flights = self.skyscanner_service.search_flights(
+                    origin=origin,
+                    destination=destination,
+                    departure_date=departure_date,
+                    return_date=return_date,
+                    max_price=max_price
+                )
+                return flights
+            except Exception as e:
+                print(f"⚠️  Error usando Skyscanner API: {e}")
+                print("   Cambiando a datos simulados...")
         
-        # Generar vuelos simulados
+        # Usar datos simulados (fallback o cuando Skyscanner no está configurado)
+        dep_date = datetime.strptime(departure_date, "%Y-%m-%d")
         flights = self._generate_mock_flights(origin, destination, dep_date)
         
         # Filtrar por precio máximo si se especifica

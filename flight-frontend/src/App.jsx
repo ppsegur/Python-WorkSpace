@@ -60,7 +60,12 @@ function App() {
       </nav>
 
       <main className="app-main">
-        {loading && <div className="loading">Cargando aeropuertos...</div>}
+        {loading && (
+          <div className="loading">
+            <div className="loading-spinner"></div>
+            <p>Cargando aeropuertos...</p>
+          </div>
+        )}
         {error && <div className="error">Error: {error}</div>}
         
         {!loading && !error && (
