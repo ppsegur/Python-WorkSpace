@@ -128,7 +128,7 @@ async def post_cheapest_weekend_flights(request: WeekendFlightRequest):
             max_price=request.max_price
         )
         
-         return {
+        return {
             "search_criteria": {
                 "origin": request.origin.upper(),
                 "destination": request.destination.upper(),

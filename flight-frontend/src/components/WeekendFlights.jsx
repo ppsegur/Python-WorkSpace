@@ -202,11 +202,11 @@ function WeekendFlights({ airports }) {
             <p><strong>Regreso:</strong> {formatDate(results.weekend_dates.sunday || results.weekend_dates.return)}</p>
           </div>
 
-          {results.best_combination && (
+          {results.cheapest_combination && (
             <div className="best-combination">
               <h3>✨ Mejor Combinación</h3>
               <div className="price-highlight">
-                <span className="price">€{results.best_combination.total_price.toFixed(2)}</span>
+                <span className="price">€{results.cheapest_combination.total_price.toFixed(2)}</span>
                 <span className="label">Precio Total (ida + vuelta)</span>
               </div>
 
@@ -214,21 +214,21 @@ function WeekendFlights({ airports }) {
                 <div className="flight-card best">
                   <div className="flight-header">
                     <h4>✈️ Vuelo de Ida</h4>
-                    <span className="airline">{results.best_combination.outbound.airline}</span>
+                    <span className="airline">{results.cheapest_combination.outbound.airline}</span>
                   </div>
                   <div className="flight-info">
                     <div className="route">
-                      <span className="airport">{results.best_combination.outbound.origin}</span>
+                      <span className="airport">{results.cheapest_combination.outbound.origin}</span>
                       <span className="arrow">→</span>
-                      <span className="airport">{results.best_combination.outbound.destination}</span>
+                      <span className="airport">{results.cheapest_combination.outbound.destination}</span>
                     </div>
                     <div className="times">
-                      <span>{formatTime(results.best_combination.outbound.departure_date)}</span>
-                      <span className="duration">{formatDuration(results.best_combination.outbound.duration_minutes)}</span>
-                      <span>{formatTime(results.best_combination.outbound.arrival_date)}</span>
+                      <span>{formatTime(results.cheapest_combination.outbound.departure_date)}</span>
+                      <span className="duration">{formatDuration(results.cheapest_combination.outbound.duration_minutes)}</span>
+                      <span>{formatTime(results.cheapest_combination.outbound.arrival_date)}</span>
                     </div>
                     <div className="price-info">
-                      <span className="price">€{results.best_combination.outbound.price.toFixed(2)}</span>
+                      <span className="price">€{results.cheapest_combination.outbound.price.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
@@ -236,21 +236,21 @@ function WeekendFlights({ airports }) {
                 <div className="flight-card best">
                   <div className="flight-header">
                     <h4>✈️ Vuelo de Vuelta</h4>
-                    <span className="airline">{results.best_combination.return.airline}</span>
+                    <span className="airline">{results.cheapest_combination.return.airline}</span>
                   </div>
                   <div className="flight-info">
                     <div className="route">
-                      <span className="airport">{results.best_combination.return.origin}</span>
+                      <span className="airport">{results.cheapest_combination.return.origin}</span>
                       <span className="arrow">→</span>
-                      <span className="airport">{results.best_combination.return.destination}</span>
+                      <span className="airport">{results.cheapest_combination.return.destination}</span>
                     </div>
                     <div className="times">
-                      <span>{formatTime(results.best_combination.return.departure_date)}</span>
-                      <span className="duration">{formatDuration(results.best_combination.return.duration_minutes)}</span>
-                      <span>{formatTime(results.best_combination.return.arrival_date)}</span>
+                      <span>{formatTime(results.cheapest_combination.return.departure_date)}</span>
+                      <span className="duration">{formatDuration(results.cheapest_combination.return.duration_minutes)}</span>
+                      <span>{formatTime(results.cheapest_combination.return.arrival_date)}</span>
                     </div>
                     <div className="price-info">
-                      <span className="price">€{results.best_combination.return.price.toFixed(2)}</span>
+                      <span className="price">€{results.cheapest_combination.return.price.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
